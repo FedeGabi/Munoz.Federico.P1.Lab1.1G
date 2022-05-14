@@ -1,0 +1,75 @@
+# depslib dependency file v1.0
+1652485976 source:c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\color.c
+	"color.h"
+
+1652483926 c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\color.h
+	<stdio.h>
+	<stdlib.h>
+
+1652482976 source:c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\fecha.c
+	"fecha.h"
+
+1652483925 c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\fecha.h
+	<stdio.h>
+	<stdlib.h>
+
+1652486504 source:c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\input.c
+	"input.h"
+
+1652491701 c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\input.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+	"marca.h"
+	"color.h"
+	"auto.h"
+	"servicio.h"
+	<stdio.h>
+	<stdlib.h>
+
+1652483922 c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\marca.h
+	<stdio.h>
+	<stdlib.h>
+
+1652490805 c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\auto.h
+	<stdio.h>
+	<stdlib.h>
+	"marca.h"
+	"color.h"
+
+1652485674 c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\servicio.h
+	<stdio.h>
+	<stdlib.h>
+
+1652491347 source:c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"fecha.h"
+	"input.h"
+	"auto.h"
+	"trabajo.h"
+	"color.h"
+	"servicio.h"
+
+1652485762 c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\trabajo.h
+	<stdio.h>
+	<stdlib.h>
+	"fecha.h"
+	"input.h"
+	"auto.h"
+	"color.h"
+	"servicio.h"
+
+1652483531 source:c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\marca.c
+	"marca.h"
+
+1652485775 source:c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\servicio.c
+	"servicio.h"
+
+1652491672 source:c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\auto.c
+	"auto.h"
+
+1652485986 source:c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\trabajo.c
+	"trabajo.h"
+
