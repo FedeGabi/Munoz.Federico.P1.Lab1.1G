@@ -85,7 +85,10 @@ int listarMarcas(eMarca marcas[],int tamMarcas)
     if(marcas != NULL && tamMarcas>0)
     {
         system("cls");
-        printf("ID            Marca\n");
+
+        printf("    LISTA MARCAS\n");
+        printf("\n");
+        printf("ID            MARCA\n");
         printf("-----------------------\n\n");
         for(int i=0 ; i<tamMarcas ; i++)
         {

@@ -16,24 +16,14 @@ int mostrarMenuPrincipal()
     printf("G. LISTAR SERVICIOS\n");
     printf("H. ALTA TRABAJO\n");
     printf("I. LISTAR TRABAJOS\n");
+    printf("J. PEOMEDIO POR CAJA\n");
+    printf("K. LISTAR POR CAJA\n");
+    printf("L. CONTAR POR COLOR Y MARCA\n");
     fflush(stdin);
     opcion=getchar();
     opcion=tolower(opcion);
     return opcion;
 }
-
-
-int menuModificarAutos()
-{
-    system("cls");
-    int opcion=0;
-    printf("1. MODIFICAR COLOR\n");
-    printf("2. MODIFICAR CAJA\n");
-    scanf("%d", &opcion);
-    fflush(stdin);
-    return opcion;
-}
-
 
 
 int ingresarFloat(float *pFloat, char msj [], char msjError[], int intentos)
@@ -80,24 +70,23 @@ int ingresarInt(int *pInt, char msj [], char msjError[])
     int retorno = -1;
     if (pInt != NULL && msj !=NULL && msjError != NULL)
     {
-        int seguir=0;
         int numero;
         int esNum;
+        int seguir=1;
         do
         {
-            system("cls");
-            printf("\n%s", msj);
+            printf("%s", msj);
             esNum = scanf("%d", &numero);
             fflush(stdin);
-            if(numero < 0 || !esNum)
+            if (numero < 0 || !esNum)
             {
-                printf("\n%s", msjError);
-                seguir=confirmar("\n Desea volver a ingresar?: ");
+                system("cls");
+                printf("%s", msjError);
+                seguir=confirmar("Volver a intentar?...");
                 *pInt = 0;
-                numero=0;
                 retorno = -1;
             }
-            else if(numero==0)
+            else if (!numero)
             {
                 *pInt = 0;
                 retorno = 0;
@@ -106,9 +95,10 @@ int ingresarInt(int *pInt, char msj [], char msjError[])
             {
                 *pInt = numero;
                 retorno = 1;
+                seguir=0;
             }
         }
-        while(seguir);
+        while(seguir==1);
     }
     return retorno;
 }
@@ -144,6 +134,46 @@ int ingresarValidarCadena(char cadena[],int tamMin,int tamMax, char msj[], char 
     return retorno;
 }
 
+
+int ingresarValidarNombre(char cadena[],int tamMin ,int tamMax, char msj[], char msjError[])
+{
+    int retorno=0;
+    char aux[400];
+    int seguir=1;
+    if(cadena != NULL && tamMin >0 && tamMax >0 && msj != NULL && msjError != NULL)
+    {
+        do
+        { system("cls");
+            printf("%s", msj);
+            fflush(stdin);
+            gets(aux);
+            if(validarLetras(aux)==0)
+            {
+                system("cls");
+                printf("\nNO SE ADMITEN VALORES NUMERICOS\n");
+                seguir=confirmar("\nDESEA VOLVER A INGRESAR? (S o N): ");
+                retorno=0;
+            }
+            else if(strlen(aux)>tamMax || strlen(aux)<tamMin)
+            {
+                printf("\nDEBE TENER UNA EXTENCION MAYOR A %d Y MENOR A %d LETRAS", tamMin, tamMax);
+                seguir=confirmar("\nDESEA VOLVER A INGRESAR? (S o N): ");
+                retorno=0;
+            }
+            else{
+                strcpy(cadena, aux);
+                retorno=1;
+                seguir=0;
+                break;
+            }
+        }
+        while(seguir);
+    }
+    return retorno;
+}
+
+
+
 int ingresarValidarCaracter(char msj[], char msjError[], char char1, char char2, char* pResultado)
 {
     int retorno=0;
@@ -153,6 +183,7 @@ int ingresarValidarCaracter(char msj[], char msjError[], char char1, char char2,
     {
         do
         {
+            system("cls");
             printf("%s",msj);
             fflush(stdin);
             caracter=getchar();
@@ -165,11 +196,31 @@ int ingresarValidarCaracter(char msj[], char msjError[], char char1, char char2,
             }
             else
             {
+                system("cls");
                 printf("%s\n", msjError);
                 seguir=confirmar("intentar nuevamente? (s o n)\n");
             }
         }
         while(seguir);
+    }
+    return retorno;
+}
+
+
+int validarLetras(char cadena[])
+{
+    int retorno=-1;
+    if(cadena!= NULL)
+    {
+        retorno=1;
+        for(int i=0; i<strlen(cadena); i++)
+        {
+            if(tolower(cadena[i]) < 97 || tolower(cadena[i]) >122)
+            {
+                retorno=0;
+                break;
+            }
+        }
     }
     return retorno;
 }

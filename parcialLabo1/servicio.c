@@ -7,13 +7,11 @@ int menuIngresarServicio(eServicio vec[], int tamServ)
     int seguir=1;
     do
     {
-        system("cls");
         for(int i=0; i<tamServ; i++)
         {
             listarServicios(vec, tamServ);
         }
-        printf("\nIngrese ID Servicio: ");
-        scanf("%d", &opcion);
+        ingresarInt(&opcion, "\nIngrese ID Servicio: ", "\nNO SE ADMITEN CARACTERES O NUMEROS NEGATIVOS");
         if(validarServicioId(vec, tamServ, opcion))
         {
             seguir=0;
@@ -101,7 +99,6 @@ int listarServicios(eServicio servicios[],int tamServ)
                 retorno=1;
         }
     }
-    system("pause");
     return retorno;
 }
 

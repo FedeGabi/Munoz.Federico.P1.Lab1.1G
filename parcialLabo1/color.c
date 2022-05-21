@@ -87,7 +87,9 @@ int listarColores(eColor Colors[],int tamColores)
     if(Colors != NULL && tamColores>0)
     {
         system("cls");
-        printf("ID            Color\n");
+        printf("     LISTA COLORES\n");
+        printf("\n");
+        printf("ID            COLOR\n");
         printf("-----------------------\n\n");
         for(int i=0 ; i<tamColores ; i++)
         {

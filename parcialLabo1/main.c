@@ -11,17 +11,23 @@
 #define TAM_COLORES 5
 #define TAM_SERVICIO 4
 
-#define TAM_AUTOS 10
-#define TAM_TRABAJOS 10
+#define TAM_AUTOS 30
+#define TAM_TRABAJOS 30
+#define TAM_CLIENTES 30
 
 int main()
 {
     eAuto autos[TAM_AUTOS];
     eTrabajo trabajos[TAM_TRABAJOS];
+    eCliente clientes[TAM_CLIENTES];
     int idNextAuto=30000;
     int idNextTrabajo=50000;
+    int idNextCLiente=80000;
     inicializarAutos(autos, TAM_AUTOS);
     inicializarTrabajos(trabajos, TAM_TRABAJOS);
+    hardcodearAutos(autos, TAM_AUTOS, clientes, TAM_CLIENTES, &idNextAuto, &idNextCLiente, 20);
+    hardcodearTrabajos(trabajos, TAM_TRABAJOS, &idNextTrabajo, 20);
+    int auxOpcion;
 
     eMarca marcas[TAM_MARCAS]=
     {
@@ -52,34 +58,78 @@ int main()
         switch(mostrarMenuPrincipal())
         {
         case 'a':
-            altaAuto(autos, TAM_AUTOS, marcas,TAM_MARCAS,colores,TAM_COLORES,&idNextAuto);
+            altaAuto(autos, TAM_AUTOS, marcas, TAM_MARCAS, colores, TAM_COLORES, clientes, TAM_CLIENTES, &idNextAuto, &idNextCLiente);
             break;
         case 'b':
+            modificarAuto(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES);
             break;
         case 'c':
-                bajaAuto(autos,marcas, colores, TAM_AUTOS, TAM_MARCAS, TAM_COLORES);
+            bajaAuto(autos,marcas, colores,clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES);
             break;
         case 'd':
-            if(!listarAutos(autos, marcas, colores, TAM_AUTOS, TAM_MARCAS, TAM_COLORES))
+
+            ordenarAutosXmarcaYCajaDescripcion(autos, TAM_AUTOS, marcas, TAM_MARCAS);
+            if(!listarAutos(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES))
             {
                 printf("\nNO EXISTEN AUTOS EN EL SISTEMA\n");
             }
             system("pause");
             break;
         case 'e':
-            listarMarcas(marcas, TAM_MARCAS);
-            system("pause");
+            auxOpcion=menuIngresarMarca(marcas, TAM_MARCAS);
+            if(auxOpcion)
+            {
+                listarAutosXMarca(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES, auxOpcion);
+                system("pause");
+                auxOpcion=0;
+            }
             break;
         case 'f':
-            listarColores(colores, TAM_COLORES);
-            system("pause");
+            auxOpcion=menuIngresarColor(colores, TAM_COLORES);
+            if(auxOpcion)
+            {
+                listarAutosXColor(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES, auxOpcion);
+                system("pause");
+                auxOpcion=0;
+            }
             break;
         case 'g':
+            listarServicios(servicios, TAM_SERVICIO);
+            system("pause");
             break;
         case 'h':
-            altaTrabajo(trabajos, TAM_TRABAJOS, autos, TAM_AUTOS, servicios, TAM_SERVICIO, marcas, TAM_MARCAS, colores, TAM_COLORES, &idNextTrabajo);
+            altaTrabajo(trabajos, TAM_TRABAJOS, autos, TAM_AUTOS, servicios, TAM_SERVICIO, marcas, TAM_MARCAS, colores, TAM_COLORES,clientes, TAM_CLIENTES, &idNextTrabajo);
             break;
         case 'i':
+            auxOpcion=menuIngresarServicio(servicios, TAM_SERVICIO);
+            if(auxOpcion)
+            {
+                listarTrabajosxServicios(trabajos, servicios, TAM_TRABAJOS, TAM_SERVICIO, auxOpcion);
+                system("pause");
+                auxOpcion=0;
+            }
+            break;
+         case 'j':
+            if(informarPromediosAutosXCaja(autos, TAM_AUTOS))
+            {
+
+            }
+            ordenarAutosXCajaDescripcion(autos, TAM_AUTOS);
+            break;
+        case 'k':
+                ordenarAutosXCajaDescripcion(autos, TAM_AUTOS);
+                listarAutos(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS,TAM_COLORES, TAM_CLIENTES);
+                system("pause");
+            break;
+            case 'l':
+                if(!contarColorYMarca(autos,colores,marcas, TAM_AUTOS, TAM_COLORES, TAM_MARCAS))
+                {
+                    printf("\n No hay autos de esa marca y color\n");
+                    system("pause");
+                }
+            break;
+            case 'm':
+                marcaMasElegida(autos, TAM_AUTOS, marcas, TAM_MARCAS);
             break;
         default:
             printf("OPCION INVALIDA\n");
