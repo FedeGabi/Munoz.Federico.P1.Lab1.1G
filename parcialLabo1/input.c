@@ -19,6 +19,7 @@ int mostrarMenuPrincipal()
     printf("J. PEOMEDIO POR CAJA\n");
     printf("K. LISTAR POR CAJA\n");
     printf("L. CONTAR POR COLOR Y MARCA\n");
+    printf("M. MARCA MAS ELEGIDA\n");
     fflush(stdin);
     opcion=getchar();
     opcion=tolower(opcion);

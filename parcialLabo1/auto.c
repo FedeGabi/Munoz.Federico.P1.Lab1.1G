@@ -3,11 +3,10 @@
 int marcas[20]= {1000,1000,1001,1000,1002,1000,1000,1003,1000,1001,1003,1001,1003,1000,1000,1002,1002,1003,1002,1003};
 int colores[20]= {5000,5000,5001,5003,5002,5001,5000,5002,5004,5001,5001,5001,5003,5000,5004,5002,5000,5000,5002,5002};
 char cajas[20]= {'m', 'm','a','a','a','a','a','a','a','a','a','m','m','a','a','a','m','a','m','a'};
-
 char nombres[20][20]= {"roberta", "pablito", "noemi", "marcos", "ruben", "facundo", "melisa", "carla", "hector", "silvana",
 "estefania", "pedrito", "noelia", "marcos", "ruben", "facundo", "melisa", "carla", "hector", "silvana"};
 
-char sexos [20]= {'f','m','f','m','m','m','f','f','m','f','f','m','f','m','m','m','f','f','m','f'};
+char sexos[20]= {'f','m','f','m','m','m','f','f','m','f','f','m','f','m','m','m','f','f','m','f'};
 
 int hardcodearAutos(eAuto autos[], int tamAutos, eCliente clientes[], int tamClientes, int* pidNext, int* idNextCliente, int cant)
 {
@@ -382,7 +381,7 @@ int listarAutos(eAuto autos[], eMarca marcas[], eColor colores[], eCliente clien
        printf("------------------------------------------------------------------\n");
         printf("--------------    LISTA AUTOS     -------------------------------\n");
         printf("-----------------------------------------------------------------\n");
-        printf("ID          MARCA         COLOR         CAJA      CLIENTE     SEXO\n");
+        printf("ID          MARCA         COLOR          CAJA         CLIENTE     SEXO\n");
         printf("--------------------------------------------------------------------\n\n");
         for(int i=0 ; i<tam ; i++)
         {
@@ -412,7 +411,7 @@ int listarAutosXColor(eAuto autos[], eMarca marcas[], eColor colores[], eCliente
         printf("------------------------------------------------------------------\n");
         printf("--------------    LISTA AUTOS     -------------------------------\n");
         printf("-----------------------------------------------------------------\n");
-        printf("ID          MARCA         COLOR         CAJA      CLIENTE     SEXO\n");
+        printf("ID          MARCA         COLOR          CAJA         CLIENTE     SEXO\n");
         printf("--------------------------------------------------------------------\n\n");
         for(int i=0 ; i<tam ; i++)
         {
@@ -444,7 +443,7 @@ int listarAutosXMarca(eAuto autos[], eMarca marcas[], eColor colores[], eCliente
         printf("------------------------------------------------------------------\n");
         printf("--------------    LISTA AUTOS     -------------------------------\n");
         printf("-----------------------------------------------------------------\n");
-        printf("ID          MARCA         COLOR         CAJA      CLIENTE     SEXO\n");
+        printf("ID          MARCA         COLOR          CAJA         CLIENTE     SEXO\n");
         printf("--------------------------------------------------------------------\n\n");
         for(int i=0 ; i<tam ; i++)
         {
@@ -656,6 +655,7 @@ int marcaMasElegida(eAuto autos[], int tamAuto, eMarca marcas[], int tamMarca)
         }
 
         system("cls");
+        system("\n");
         printf("Marca mas elegidas con %d unidades es: ", mayor);
 
         for(int i=0; i < tamMarca; i++)
