@@ -25,9 +25,12 @@ int main()
     int idNextCLiente=80000;
     inicializarAutos(autos, TAM_AUTOS);
     inicializarTrabajos(trabajos, TAM_TRABAJOS);
+    inicializarClientes(clientes, TAM_CLIENTES);
     hardcodearAutos(autos, TAM_AUTOS, clientes, TAM_CLIENTES, &idNextAuto, &idNextCLiente, 20);
     hardcodearTrabajos(trabajos, TAM_TRABAJOS, &idNextTrabajo, 20);
     int auxOpcion;
+
+    system("pause");
 
     eMarca marcas[TAM_MARCAS]=
     {
@@ -52,6 +55,30 @@ int main()
         {20002, "Encerado", 600},
         {20003, "Completo", 900}
     };
+
+
+
+    for(int i=0; i<TAM_AUTOS; i++)
+    {
+        if(autos[i].isEmpty==0)
+        {
+            char auxNombre[20];
+            char auxColor[20];
+            char auxMarca[20];
+            cargarDescripcionCliente(clientes, auxNombre, autos[i].idCliente, TAM_CLIENTES);
+            cargarDescripcionColor(colores, auxColor, autos[i].idColor, TAM_COLORES);
+            cargarDescripcionMarca(marcas, auxMarca, autos[i].idMarca, TAM_MARCAS);
+            printf("%d,  %d,  %d, %d, %10s, %10s, %10s,  %c\n", autos[i].id, autos[i].idMarca, autos[i].idColor, autos[i].idCliente,
+                                                    auxMarca, auxColor,
+                                                    clientes[i].nombre, clientes[i].sexo);
+        }
+    }
+    system("pause");
+
+
+
+
+
     char seguir='s';
     do
     {

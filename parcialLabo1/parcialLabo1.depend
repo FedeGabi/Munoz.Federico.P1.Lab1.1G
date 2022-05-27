@@ -76,3 +76,80 @@
 1653089384 source:c:\users\fedec\onedrive\desktop\labo\munoz.federico.p1.lab1.1g\parciallabo1\cliente.c
 	"cliente.h"
 
+1653673434 source:c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\auto.c
+	"auto.h"
+
+1653094861 c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\auto.h
+	<stdio.h>
+	<stdlib.h>
+	"marca.h"
+	"color.h"
+	"cliente.h"
+
+1653094861 c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\marca.h
+	<stdio.h>
+	<stdlib.h>
+	"input.h"
+
+1653094861 c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\input.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+
+1653094861 c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\color.h
+	<stdio.h>
+	<stdlib.h>
+
+1653673111 c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\cliente.h
+	<stdio.h>
+	<stdlib.h>
+
+1653094861 source:c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\color.c
+	"color.h"
+
+1653094861 source:c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\fecha.c
+	"fecha.h"
+
+1653094861 c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\fecha.h
+	<stdio.h>
+	<stdlib.h>
+
+1653094861 source:c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\input.c
+	"input.h"
+
+1653667617 source:c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"fecha.h"
+	"input.h"
+	"auto.h"
+	"trabajo.h"
+	"color.h"
+	"servicio.h"
+
+1653094861 c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\trabajo.h
+	<stdio.h>
+	<stdlib.h>
+	"fecha.h"
+	"input.h"
+	"auto.h"
+	"color.h"
+	"servicio.h"
+
+1653094861 c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\servicio.h
+	<stdio.h>
+	<stdlib.h>
+
+1653094861 source:c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\marca.c
+	"marca.h"
+
+1653094861 source:c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\servicio.c
+	"servicio.h"
+
+1653094861 source:c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\trabajo.c
+	"trabajo.h"
+
+1653672705 source:c:\users\fedec\onedrive\desktop\munoz.federico.p1.lab1.1g-main\parciallabo1\cliente.c
+	"cliente.h"
+

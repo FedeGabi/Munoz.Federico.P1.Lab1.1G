@@ -20,7 +20,8 @@ int hardcodearAutos(eAuto autos[], int tamAutos, eCliente clientes[], int tamCli
             strcpy(clientes[i].nombre, nombres[i]);
             clientes[i].sexo=sexos[i];
             clientes[i].id=*idNextCliente;
-            autos[i].idCliente=*idNextCliente;
+            clientes[i].isEmpty=0;
+            autos[i].idCliente= clientes[i].id;
             autos[i].caja=cajas[i];
             autos[i].id=*pidNext;
             autos[i].isEmpty=0;
@@ -168,15 +169,17 @@ int altaAuto(eAuto vec[], int tam, eMarca marcas[], int tamMarcas, eColor colore
     if(vec != NULL && tam>0 && marcas != NULL && tamMarcas>0 && colores != NULL && tamColores>0 && pIdNext!= NULL)
     {
         eAuto auxAuto;
-        eCliente auxCliente;
         int contadorIngresos=0;
         int indice;
-        int auxInt=0;
+        int indiceCliente;
+        char auxNombre[20];
+        char auxSexo;
         char auxChar;
         indice=buscarPrimerVacio(vec, tam);
-        if(indice>=0)
+        indiceCliente=buscarPrimerClienteVacio(clientes, tamCLientes);
+        if(indice>-1 && indiceCliente>-1)
         {
-            if(menuIngresarCliente(auxCliente, tamCLientes))
+            if(menuIngresarCliente(auxNombre, &auxSexo))
             {
                 contadorIngresos++;
                 auxAuto.idMarca=menuIngresarMarca(marcas,tamMarcas);
@@ -190,7 +193,6 @@ int altaAuto(eAuto vec[], int tam, eMarca marcas[], int tamMarcas, eColor colore
                         if(ingresarValidarCaracter("\nIngrese caja (m o a): ", "\n Error, valor invalido...", 'a', 'm', &auxChar))
                         {
                             contadorIngresos++;
-                            auxAuto.caja=auxInt;
                             auxAuto.caja=auxChar;
                             auxAuto.isEmpty=0;
                         }
@@ -201,9 +203,12 @@ int altaAuto(eAuto vec[], int tam, eMarca marcas[], int tamMarcas, eColor colore
             if(contadorIngresos==4)
             {
                 vec[indice]=auxAuto;
-                clientes[indice]=auxCliente;
-                clientes[indice].id= *idNextCliente;
+                vec[indice].idCliente= *idNextCliente;
                 vec[indice].id=*pIdNext;
+                strcpy(clientes[indiceCliente].nombre, auxNombre);
+                clientes[indiceCliente].sexo=auxSexo;
+                clientes[indiceCliente].id= *idNextCliente;
+                clientes[indiceCliente].isEmpty=0;
                 (*idNextCliente)++;
                 (*pIdNext)++;
                 system("cls");
@@ -470,10 +475,13 @@ void mostrarAuto(eAuto autos, eMarca marcas[], eColor colores[], eCliente client
     char descMarca[20];
     char descColor[20];
     char cliente[20];
+    int aux;
+    aux=buscarClienteXId(clientes, autos.idCliente, tamClientes);
+
     cargarDescripcionCliente(clientes, cliente, autos.idCliente, tamClientes);
     cargarDescripcionMarca(marcas, descMarca, autos.idMarca, tamMarcas);
     cargarDescripcionColor(colores, descColor, autos.idColor, tamColores);
-    printf("%d  |   %10s   |   %10s   |   %c  |   %10s   |   %c  \n", autos.id, descMarca, descColor, toupper(autos.caja), cliente, toupper(clientes->sexo));
+    printf("%d  |   %10s   |   %10s   |   %c  |   %10s   |   %c  \n", autos.id, descMarca, descColor, toupper(autos.caja), cliente, toupper(clientes[aux].sexo));
 }
 
 int ordenarAutosXmarcaYCajaDescripcion(eAuto autos[], int tamAutos, eMarca marcas[], int tamMarcas)

@@ -1,5 +1,19 @@
 #include "cliente.h"
 
+int inicializarClientes(eCliente vec[], int tamCliente)
+{
+    int retorno=0;
+    if(vec != NULL && tamCliente >0)
+    {
+        for(int i=0; i<tamCliente ; i++)
+        {
+            vec[i].isEmpty=1;
+        }
+        retorno=1;
+    }
+    return retorno;
+}
+
 
 int cargarDescripcionCliente(eCliente clientes[], char nombre[], int id, int tamClientes)
 {
@@ -19,7 +33,7 @@ int cargarDescripcionCliente(eCliente clientes[], char nombre[], int id, int tam
     return retorno;
 }
 
-int menuIngresarCliente(eCliente vec, int tamClientet)
+int menuIngresarCliente(char nombre[], char* sexo)
 {
     int retorno=0;
     char auxNombre[20];
@@ -35,26 +49,27 @@ int menuIngresarCliente(eCliente vec, int tamClientet)
             if(contador==1 && ingresarValidarCaracter("\nIngrese sexo: ", "\nError, caracter invalido", 'm', 'f', &auxSexo))
             {
                 contador++;
-                seguir=0;
                 retorno=1;
             }
             if(contador==2)
             {
-                strcpy(vec.nombre, auxNombre);
-                vec.sexo=auxSexo;
+                strcpy(nombre, auxNombre);
+                *sexo=auxSexo;
                 retorno=1;
                 seguir=0;
             }
-            else{
-                printf("\ndeben ingresarse todos los valores");
+            else
+            {
                 system("cls");
-                seguir=confirmar("\nError, ID invalido, volver a ingresar? (s o n): ");
+                printf("\ndeben ingresarse todos los valores");
+                seguir=confirmar("\nvolver a ingresar? (s o n): ");
                 retorno=0;
             }
         }
-        else{
+        else
+        {
             system("cls");
-            seguir=confirmar("\nError, ID invalido, volver a ingresar? (s o n): ");
+            seguir=confirmar("\ndeben ingresarse todos los valores, volver a ingresar? (s o n): ");
             retorno=0;
         }
     }
@@ -62,3 +77,37 @@ int menuIngresarCliente(eCliente vec, int tamClientet)
     return retorno;
 }
 
+
+int buscarPrimerClienteVacio(eCliente vec[], int tamCliente)
+{
+    int indice = -1;
+    if( vec != NULL && tamCliente > 0 )
+    {
+        for(int i=0; i < tamCliente; i++)
+        {
+            if(vec[i].isEmpty)
+            {
+                indice=i;
+                break;
+            }
+        }
+    }
+    return indice;
+}
+
+int buscarClienteXId(eCliente clientes[], int idCliente, int tamClientes)
+{
+    int indice=-1;
+    if(clientes!= NULL && tamClientes>0)
+    {
+        for(int i=0; i<tamClientes; i++)
+        {
+            if(clientes[i].id == idCliente)
+            {
+                indice=i;
+                break;
+            }
+        }
+    }
+    return indice;
+}
