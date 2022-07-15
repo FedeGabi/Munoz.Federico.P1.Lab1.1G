@@ -1,169 +1,163 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "fecha.h"
-#include "input.h"
-#include "auto.h"
-#include "trabajo.h"
-#include "color.h"
-#include "servicio.h"
+/*
+ENTIDADES:
+Fecha:
+• dia
+• mes
+• año
+Marca:
+• id (comienza en 1000)
+• descripción (máx 20 caracteres)
+Color:
+• id (comienza en 5000)
+• nombreColor(máx 20 caracteres)
+Auto:
+• id
+• idMarca Validar
+• idColor Validar
+• caja( “m” manual, “a” automática)
+Servicio:
+• id(comienza en 20000)
+• descripción (máximo 25 caracteres)
+• precio
+Trabajo:
+• id (autoincremental)
+• idAuto (debe existir) Validar
+• idServicio (debe existir) Validar
+• fecha ( Validar día, mes y año )
+DATOS PREVIOS:
+Los arrays de marca, color y lavado deberán ser hardcodeados.
+Marcas (Renault, Ford, Fiat, Chevrolet, Peugeot)
+Colores (Negro, Blanco, Rojo, Verde, Azul)
+Lavados (Lavado: $450, Pulido: $500, Encerado: $600, Completo: $900)
+*/
 
+#define TAM_AUTOS 20
+#define TAM_TRABAJOS 20
+#define TAM_CLIENTES 20
 #define TAM_MARCAS 5
 #define TAM_COLORES 5
-#define TAM_SERVICIO 4
+#define TAM_SERVICIOS 4
 
-#define TAM_AUTOS 30
-#define TAM_TRABAJOS 30
-#define TAM_CLIENTES 30
+#include <stdio.h>
+#include <stdlib.h>
+#include "inputs.h"
+#include "marca.h"
+#include "color.h"
+#include "trabajo.h"
+#include "auto.h"
+#include "servicio.h"
+#include "cliente.h"
+#include "informes.h"
 
 int main()
 {
-    eAuto autos[TAM_AUTOS];
-    eTrabajo trabajos[TAM_TRABAJOS];
-    eCliente clientes[TAM_CLIENTES];
-    int idNextAuto=30000;
-    int idNextTrabajo=50000;
-    int idNextCLiente=80000;
-    inicializarAutos(autos, TAM_AUTOS);
-    inicializarTrabajos(trabajos, TAM_TRABAJOS);
-    inicializarClientes(clientes, TAM_CLIENTES);
-    hardcodearAutos(autos, TAM_AUTOS, clientes, TAM_CLIENTES, &idNextAuto, &idNextCLiente, 20);
-    hardcodearTrabajos(trabajos, TAM_TRABAJOS, &idNextTrabajo, 20);
-    int auxOpcion;
+    int seguir=1;
+    int idNextautos=1000;
+    int idNextTrabajos=50000;
+    int idNextClientes=100000;
 
-    system("pause");
+    eAuto listaAutos[TAM_AUTOS];
+    eColor listaColores[TAM_COLORES];
+    eMarca listaMarcas[TAM_MARCAS];
+    eTrabajo listaTrabajos[TAM_TRABAJOS];
+    eServicio listaServicios[TAM_SERVICIOS];
+    eCliente listaClientes[TAM_CLIENTES];
 
-    eMarca marcas[TAM_MARCAS]=
-    {
-        {1000, "Ford"},
-        {1001, "Peugeot"},
-        {1002, "Renault"},
-        {1003, "Fiat"},
-        {1004, "Chevrolet"}
-    };
-    eColor colores[TAM_COLORES]=
-    {
-        {5000, "Verde"},
-        {5001, "Rojo"},
-        {5002, "Azul"},
-        {5003, "Blanco"},
-        {5004, "Negro"}
-    };
-    eServicio servicios[TAM_SERVICIO]=
-    {
-        {20000, "Lavado", 450},
-        {20001, "Pulido", 500},
-        {20002, "Encerado", 600},
-        {20003, "Completo", 900}
-    };
+    hardcodearColores(listaColores, TAM_COLORES);
+    hardcodearMarcas(listaMarcas, TAM_MARCAS);
+    hardcodearServicios(listaServicios, TAM_SERVICIOS);
 
+    inicializarListaAutos(listaAutos, TAM_AUTOS);
+    inicializarListaTrabajos(listaTrabajos, TAM_TRABAJOS);
+    inicializarListaCLientes(listaClientes, TAM_CLIENTES);
 
+    hardcodearClientes(listaClientes, TAM_CLIENTES, 15, &idNextClientes);
+    hardcodearAutos(listaAutos, TAM_AUTOS,listaClientes, TAM_CLIENTES, 15, &idNextautos);
+    hardcodearTrabajos(listaTrabajos, listaAutos, TAM_TRABAJOS, TAM_AUTOS,15, &idNextTrabajos);
 
-    for(int i=0; i<TAM_AUTOS; i++)
-    {
-        if(autos[i].isEmpty==0)
-        {
-            char auxNombre[20];
-            char auxColor[20];
-            char auxMarca[20];
-            cargarDescripcionCliente(clientes, auxNombre, autos[i].idCliente, TAM_CLIENTES);
-            cargarDescripcionColor(colores, auxColor, autos[i].idColor, TAM_COLORES);
-            cargarDescripcionMarca(marcas, auxMarca, autos[i].idMarca, TAM_MARCAS);
-            printf("%d,  %d,  %d, %d, %10s, %10s, %10s,  %c\n", autos[i].id, autos[i].idMarca, autos[i].idColor, autos[i].idCliente,
-                                                    auxMarca, auxColor,
-                                                    clientes[i].nombre, clientes[i].sexo);
-        }
-    }
-    system("pause");
-
-
-
-
-
-    char seguir='s';
     do
     {
         switch(mostrarMenuPrincipal())
         {
         case 'a':
-            altaAuto(autos, TAM_AUTOS, marcas, TAM_MARCAS, colores, TAM_COLORES, clientes, TAM_CLIENTES, &idNextAuto, &idNextCLiente);
+            altaAuto(listaAutos, TAM_AUTOS, listaMarcas, TAM_MARCAS, listaColores, TAM_COLORES,listaClientes,TAM_CLIENTES, &idNextautos, &idNextClientes);
             break;
         case 'b':
-            modificarAuto(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES);
+            if(isNotEmpty(listaAutos, TAM_AUTOS))
+            {
+                modificarAuto(listaAutos, listaMarcas, listaColores,listaClientes, TAM_CLIENTES, TAM_AUTOS, TAM_MARCAS, TAM_COLORES);
+            }
+            else
+            {
+                printf("\n No hay autos cargados en el sistema\n");
+                system("pause");
+            }
             break;
         case 'c':
-            bajaAuto(autos,marcas, colores,clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES);
+            if(isNotEmpty(listaAutos, TAM_AUTOS))
+            {
+                eliminarAuto(listaAutos, TAM_AUTOS, listaMarcas, TAM_MARCAS, listaColores, TAM_COLORES, listaClientes, TAM_CLIENTES);
+            }
+            else
+            {
+                printf("\n No hay autos cargados en el sistema\n");
+                system("pause");
+            }
             break;
         case 'd':
-
-            ordenarAutosXmarcaYCajaDescripcion(autos, TAM_AUTOS, marcas, TAM_MARCAS);
-            if(!listarAutos(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES))
+            if(isNotEmpty(listaAutos, TAM_AUTOS))
             {
-                printf("\nNO EXISTEN AUTOS EN EL SISTEMA\n");
+                listarAutos(listaAutos, TAM_AUTOS, listaMarcas, listaColores,listaClientes, TAM_CLIENTES, TAM_COLORES, TAM_MARCAS);
+            }
+            else
+            {
+                printf("\n No hay autos cargados en el sistema\n");
             }
             system("pause");
             break;
         case 'e':
-            auxOpcion=menuIngresarMarca(marcas, TAM_MARCAS);
-            if(auxOpcion)
-            {
-                listarAutosXMarca(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES, auxOpcion);
-                system("pause");
-                auxOpcion=0;
-            }
+            mostrarAutosMarca(listaAutos, TAM_AUTOS, listaColores, listaMarcas,listaClientes,TAM_CLIENTES, TAM_COLORES, TAM_MARCAS);
+            system("pause");
             break;
         case 'f':
-            auxOpcion=menuIngresarColor(colores, TAM_COLORES);
-            if(auxOpcion)
-            {
-                listarAutosXColor(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS, TAM_COLORES, TAM_CLIENTES, auxOpcion);
-                system("pause");
-                auxOpcion=0;
-            }
+            mostrarAutosColor(listaAutos, TAM_AUTOS, listaColores, listaMarcas,listaClientes, TAM_CLIENTES, TAM_COLORES, TAM_MARCAS);
+            system("pause");
             break;
         case 'g':
-            listarServicios(servicios, TAM_SERVICIO);
-            system("pause");
             break;
         case 'h':
-            altaTrabajo(trabajos, TAM_TRABAJOS, autos, TAM_AUTOS, servicios, TAM_SERVICIO, marcas, TAM_MARCAS, colores, TAM_COLORES,clientes, TAM_CLIENTES, &idNextTrabajo);
+            altaTrabajo(listaTrabajos, listaServicios, listaAutos, listaColores, listaMarcas,listaClientes, TAM_TRABAJOS,TAM_SERVICIOS,TAM_AUTOS,TAM_COLORES,TAM_MARCAS,TAM_CLIENTES,&idNextTrabajos);
             break;
         case 'i':
-            auxOpcion=menuIngresarServicio(servicios, TAM_SERVICIO);
-            if(auxOpcion)
+            if(isNotEmptyTrabajo(listaTrabajos, TAM_TRABAJOS))
             {
-                listarTrabajosxServicios(trabajos, servicios, TAM_TRABAJOS, TAM_SERVICIO, auxOpcion);
-                system("pause");
-                auxOpcion=0;
+                listarTrabajos(listaTrabajos, listaServicios, TAM_TRABAJOS, TAM_SERVICIOS);
             }
+            else{
+                printf("\nNo hay trabajos cargados en el sistema\n");
+            }
+            system("pause");
             break;
-         case 'j':
-            if(informarPromediosAutosXCaja(autos, TAM_AUTOS))
-            {
-
-            }
-            ordenarAutosXCajaDescripcion(autos, TAM_AUTOS);
+        case 'j':
+            calcularPorcentajeCajas(listaAutos, TAM_AUTOS);
+            system("pause");
             break;
         case 'k':
-                ordenarAutosXCajaDescripcion(autos, TAM_AUTOS);
-                listarAutos(autos, marcas, colores, clientes, TAM_AUTOS, TAM_MARCAS,TAM_COLORES, TAM_CLIENTES);
-                system("pause");
-            break;
-            case 'l':
-                if(!contarColorYMarca(autos,colores,marcas, TAM_AUTOS, TAM_COLORES, TAM_MARCAS))
-                {
-                    printf("\n No hay autos de esa marca y color\n");
-                    system("pause");
-                }
-            break;
-            case 'm':
-                marcaMasElegida(autos, TAM_AUTOS, marcas, TAM_MARCAS);
-            break;
-        default:
-            printf("OPCION INVALIDA\n");
+            mostrarListaOrdenadaPorCaja(listaAutos, TAM_AUTOS, listaMarcas, listaColores, listaClientes, TAM_CLIENTES, TAM_MARCAS, TAM_COLORES);
             system("pause");
+            break;
+        case 'l':
+            contarAutosColorMarca(listaAutos, listaColores, listaMarcas, listaClientes, TAM_CLIENTES, TAM_AUTOS, TAM_COLORES, TAM_MARCAS);
+            break;
+        case 'm':
+            mostrarTrabajosFecha(listaTrabajos, TAM_TRABAJOS, listaServicios, TAM_SERVICIOS);
+            break;
+        case 'n':
+            marcaMasElegidaCliente(listaAutos, TAM_AUTOS, listaMarcas, TAM_MARCAS);
+        default:
             break;
         }
     }
-    while(seguir=='s');
+    while(seguir==1);
     return 0;
 }

@@ -1,0 +1,93 @@
+# depslib dependency file v1.0
+1657887853 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\auto.c
+	"auto.h"
+
+1657887877 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\auto.h
+	<stdio.h>
+	<stdlib.h>
+	"marca.h"
+	"color.h"
+	"cliente.h"
+
+1657890197 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\marca.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"inputs.h"
+
+1657889846 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\color.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"inputs.h"
+
+1657888151 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\inputs.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+
+1657718807 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\cliente.h
+	"inputs.h"
+	<string.h>
+
+1657884482 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\cliente.c
+	"cliente.h"
+
+1657726765 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\color.c
+	"color.h"
+
+1657573852 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\fecha.c
+	"fecha.h"
+
+1657888245 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\fecha.h
+	<stdio.h>
+	<stdlib.h>
+	"inputs.h"
+
+1657888282 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\informes.c
+	"informes.h"
+
+1657887731 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\informes.h
+	"trabajo.h"
+	"servicio.h"
+	"cliente.h"
+	"marca.h"
+	"color.h"
+	"auto.h"
+
+1657889979 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\trabajo.h
+	"fecha.h"
+	"auto.h"
+	"servicio.h"
+
+1657890215 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\servicio.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"inputs.h"
+
+1657735639 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\inputs.c
+	"inputs.h"
+
+1657887869 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\main.c
+	<stdio.h>
+	<stdlib.h>
+	"inputs.h"
+	"marca.h"
+	"color.h"
+	"trabajo.h"
+	"auto.h"
+	"servicio.h"
+	"cliente.h"
+	"informes.h"
+
+1657726721 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\marca.c
+	"marca.h"
+
+1657726721 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\servicio.c
+	"servicio.h"
+
+1657887846 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\trabajo.c
+	"trabajo.h"
+

@@ -1,9 +1,7 @@
 #ifndef CLIENTE_H_INCLUDED
 #define CLIENTE_H_INCLUDED
-#include <stdio.h>
-#include <stdlib.h>
-//#include <string.h>
-
+#include "inputs.h"
+#include <string.h>
 typedef struct{
     int id;
     char nombre[20];
@@ -11,9 +9,10 @@ typedef struct{
     int isEmpty;
 }eCliente;
 
-int cargarDescripcionCliente(eCliente clientes[], char nombre[], int id, int tamClientes);
-int menuIngresarCliente(char nombre[], char* sexo);
-int buscarPrimerClienteVacio(eCliente vec[], int tamCliente);
-int inicializarClientes(eCliente vec[], int tamCliente);
-int buscarClienteXId(eCliente clientes[], int idCliente, int tamClientes);
+int hardcodearClientes(eCliente listaClientes[], int tamClientes, int cant, int* nextId);
+int inicializarListaCLientes(eCliente listaClientes[],int tamClientes);
+int ingresarCliente(eCliente listaClientes[], int tamClientes, int* idNext);
+int ingresarSexo(char* sexo);
+int buscarPrimerClienteVacio(eCliente listaClientes[], int tamClientes);
+int cargarNombreClienteId(eCliente listaClientes[], int tamClientes,int id, char nombre[]);
 #endif // CLIENTE_H_INCLUDED

@@ -1,78 +1,98 @@
 #include "color.h"
 
-int menuIngresarColor(eColor vec[], int tamColores)
-{
-    int opcion=0;
-    int seguir=1;
-    do
-    {
-        system("cls");
-        listarColores(vec, tamColores);
-        printf("\nIngrese ID Color: ");
-        scanf("%d", &opcion);
-        if(validarColorId(vec,tamColores, opcion))
-        {
-            seguir=0;
-        }
-        else
-        {
-            system("cls");
-            seguir=confirmar("\nError, ID invalido, volver a ingresar? (s o n): ");
-            opcion=0;
-        }
-    }
-    while(seguir);
-    return opcion;
-}
 
+int idColores[5]= {5000,5001,5002,5003,5004};
+char colores[5][20]= {"Negro",
+                      "Rojo",
+                      "verde",
+                      "Blanco",
+                      "Azul"
+                     };
 
-
-int buscarColorId(eColor vec[], int tamColores, int id, int* pIndice)
-{
-    int retorno = 0;
-    if( vec != NULL && pIndice != NULL && tamColores > 0 )
-    {
-        *pIndice = -1;
-        for(int i=0; i < tamColores; i++)
-        {
-            if(vec[i].id == id)
-            {
-                *pIndice = i;
-                retorno=1;
-                break;
-            }
-        }
-    }
-    return retorno;
-}
-
-int validarColorId(eColor vec[], int tamColores, int id)
-{
-    int retorno = 0;
-    if( vec != NULL && tamColores > 0 && id>0 )
-    {
-        for(int i=0; i < tamColores; i++)
-        {
-            if(vec[i].id == id)
-            {
-                retorno=1;
-                break;
-            }
-        }
-    }
-    return retorno;
-}
-
-int cargarDescripcionColor(eColor colores[], char descripcion[], int id, int tamColores)
+int hardcodearColores(eColor listaColores[], int tamColores)
 {
     int retorno=0;
-    if(colores != NULL && descripcion != NULL && tamColores>0 && id>0)
+    if(listaColores!=NULL && tamColores >0)
     {
         for(int i=0; i<tamColores; i++)
         {
-            if(colores[i].id == id)
+            listaColores[i].id=idColores[i];
+            strcpy(listaColores[i].descripcion, colores[i]);
+        }
+        retorno=1;
+    }
+    return retorno;
+}
+
+
+int menuIngresarColor(int* id)
+{
+    int seguir=1;
+    int retorno=0;
+    int auxId;
+    do
+    {
+        system("cls");
+        printf("\n                      ****************************                      \n");
+        printf("                      ****** COLORES ******                     \n");
+        printf("                      ****************************                     \n\n");
+        printf("1. NEGRO\n");
+        printf("2. ROJO\n");
+        printf("3. VERDE\n");
+        printf("4. BLANCO\n");
+        printf("5. AZUL\n\n");
+        printf("INGRESE OPCION: ");
+        scanf("%d", &auxId);
+        fflush(stdin);
+        if(auxId==1)
+        {
+            *id=5000;
+            seguir=0;
+            retorno=1;
+        }
+        else if(auxId ==2)
+        {
+            *id=5001;
+            seguir=0;
+            retorno=1;
+        }
+        else if(auxId ==3)
+        {
+            *id=5002;
+            seguir=0;
+            retorno=1;
+        }
+        else if(auxId==4)
+        {
+            *id=5003;
+            seguir=0;
+            retorno=1;
+        }
+        else if(auxId==5)
+        {
+            *id=5004;
+            seguir=0;
+            retorno=1;
+        }
+        else
+        {
+            seguir=confirmar("\n Opcion incorrecta. Volver a ingresar? (s o n): ");
+        }
+    }
+    while(seguir==1);
+    return retorno;
+}
+
+int cargarDescripcionColorId(eColor listaColores[], int tamColores,int id, char descripcion[])
+{
+    int retorno=0;
+    if(listaColores!=NULL && tamColores>0 && descripcion!=NULL)
+    {
+        for(int i=0; i<tamColores; i++)
+        {
+            if(listaColores[i].id== id)
             {
-                strcpy(descripcion, colores[i].nombreColor);
+                strcpy(descripcion, listaColores[i].descripcion);
                 retorno=1;
                 break;
             }
@@ -80,32 +100,3 @@ int cargarDescripcionColor(eColor colores[], char descripcion[], int id, int tam
     }
     return retorno;
 }
-
-int listarColores(eColor Colors[],int tamColores)
-{
-    int retorno=0;
-    if(Colors != NULL && tamColores>0)
-    {
-        system("cls");
-        printf("     LISTA COLORES\n");
-        printf("\n");
-        printf("ID            COLOR\n");
-        printf("-----------------------\n\n");
-        for(int i=0 ; i<tamColores ; i++)
-        {
-                mostrarColor(Colors[i]);
-                retorno=1;
-        }
-    }
-    return retorno;
-}
-
-void mostrarColor(eColor color)
-{
-    printf("%d  |   %10s   \n", color.id, color.nombreColor);
-}
-
-
-
-
-

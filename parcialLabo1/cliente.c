@@ -1,13 +1,37 @@
 #include "cliente.h"
 
-int inicializarClientes(eCliente vec[], int tamCliente)
+
+char nombres[20][20]= {"roberta", "pablito", "noemi", "marcos", "ruben", "facundo", "melisa", "carla", "hector", "silvana",
+                        "estefania", "pedrito", "noelia", "marcos", "ruben", "facundo", "melisa", "carla", "hector", "silvana"};
+
+char sexos[20]= {'f','m','f','m','m','m','f','f','m','f','f','m','f','m','m','m','f','f','m','f'};
+
+int hardcodearClientes(eCliente listaClientes[], int tamClientes, int cant, int* nextId)
+{
+    if(listaClientes!=NULL && tamClientes >0 && cant >0 && cant <=tamClientes)
+    {
+        for(int i=0; i<cant; i++)
+        {
+            strcpy(listaClientes[i].nombre, nombres[i]);
+            listaClientes[i].sexo=sexos[i];
+            listaClientes[i].id=*nextId;
+            (*nextId)++;
+            listaClientes[i].isEmpty=0;
+        }
+    }
+    return 0;
+}
+
+
+
+int inicializarListaCLientes(eCliente listaClientes[],int tamClientes)
 {
     int retorno=0;
-    if(vec != NULL && tamCliente >0)
+    if(listaClientes!=NULL)
     {
-        for(int i=0; i<tamCliente ; i++)
+        for(int i=0; i<tamClientes; i++)
         {
-            vec[i].isEmpty=1;
+            listaClientes[i].isEmpty=1;
         }
         retorno=1;
     }
@@ -15,77 +39,69 @@ int inicializarClientes(eCliente vec[], int tamCliente)
 }
 
 
-int cargarDescripcionCliente(eCliente clientes[], char nombre[], int id, int tamClientes)
-{
-    int retorno=0;
-    if(clientes != NULL && nombre != NULL && tamClientes>0 && id>0)
-    {
-        for(int i=0; i<tamClientes; i++)
-        {
-            if(clientes[i].id == id)
-            {
-                strcpy(nombre, clientes[i].nombre);
-                retorno=1;
-                break;
-            }
-        }
-    }
-    return retorno;
-}
 
-int menuIngresarCliente(char nombre[], char* sexo)
+int ingresarCliente(eCliente listaClientes[], int tamClientes, int* idNext)
 {
     int retorno=0;
     char auxNombre[20];
     char auxSexo;
-    int contador=0;
-    int seguir=1;
-    do
+    int indice=-1;
+    if(listaClientes!=NULL && tamClientes>0)
     {
-        system("cls");
-        if(ingresarValidarNombre(auxNombre, 3, 20, "\nIngrese nombre cliente ", "\nError, reingrese nombre"))
+        indice=buscarPrimerClienteVacio(listaClientes, tamClientes);
+        if(indice!=-1)
         {
-            contador++;
-            if(contador==1 && ingresarValidarCaracter("\nIngrese sexo: ", "\nError, caracter invalido", 'm', 'f', &auxSexo))
+            if(ingresarValidarNombre(auxNombre, 3, 19, "\nIngrese nombre: ") &&
+                    ingresarSexo(&auxSexo))
             {
-                contador++;
+                strcpy(listaClientes[indice].nombre, auxNombre);
+                listaClientes[indice].sexo=auxSexo;
+                listaClientes[indice].id=*idNext;
+                (*idNext)++;
+                listaClientes[indice].isEmpty=0;
                 retorno=1;
-            }
-            if(contador==2)
-            {
-                strcpy(nombre, auxNombre);
-                *sexo=auxSexo;
-                retorno=1;
-                seguir=0;
-            }
-            else
-            {
-                system("cls");
-                printf("\ndeben ingresarse todos los valores");
-                seguir=confirmar("\nvolver a ingresar? (s o n): ");
-                retorno=0;
             }
         }
         else
         {
-            system("cls");
-            seguir=confirmar("\ndeben ingresarse todos los valores, volver a ingresar? (s o n): ");
-            retorno=0;
+            printf("\nNo hay espacio en lista cliente\n");
+            system("pause");
         }
     }
-    while(seguir);
     return retorno;
 }
 
-
-int buscarPrimerClienteVacio(eCliente vec[], int tamCliente)
+int ingresarSexo(char* sexo)
 {
-    int indice = -1;
-    if( vec != NULL && tamCliente > 0 )
+    int seguir=1;
+    int retorno=0;
+    char auxSexo;
+    if(sexo!=NULL)
     {
-        for(int i=0; i < tamCliente; i++)
+        do
         {
-            if(vec[i].isEmpty)
+            printf("ingresar sexo: ");
+            auxSexo=getchar();
+            if(tolower(auxSexo)== 'm' || tolower(auxSexo)== 'f')
+            {
+                *sexo=auxSexo;
+                seguir=0;
+                retorno=1;
+            }
+        }
+        while(seguir==1);
+    }
+    return retorno;
+}
+
+int buscarPrimerClienteVacio(eCliente listaClientes[], int tamClientes)
+{
+    int indice=-1;
+    if(listaClientes!=NULL && tamClientes>0)
+    {
+        for(int i=0; i<tamClientes; i++)
+        {
+            if(listaClientes[i].isEmpty==1)
             {
                 indice=i;
                 break;
@@ -95,19 +111,26 @@ int buscarPrimerClienteVacio(eCliente vec[], int tamCliente)
     return indice;
 }
 
-int buscarClienteXId(eCliente clientes[], int idCliente, int tamClientes)
+
+int cargarNombreClienteId(eCliente listaClientes[], int tamClientes,int id, char nombre[])
 {
-    int indice=-1;
-    if(clientes!= NULL && tamClientes>0)
+    int retorno=0;
+    if(listaClientes!=NULL && tamClientes>0 && nombre!=NULL)
     {
         for(int i=0; i<tamClientes; i++)
         {
-            if(clientes[i].id == idCliente)
+            if(listaClientes[i].id== id)
             {
-                indice=i;
+                strcpy(nombre, listaClientes[i].nombre);
+                retorno=1;
                 break;
             }
         }
     }
-    return indice;
+    return retorno;
+}
+
+void mostrarCliente(eCliente cliente)
+{
+    printf("%d %10s %5c  %d\n", cliente.id, cliente.nombre, cliente.sexo, cliente.isEmpty);
 }

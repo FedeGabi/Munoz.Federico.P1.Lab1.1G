@@ -2,21 +2,16 @@
 #define SERVICIO_H_INCLUDED
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "inputs.h"
 typedef struct{
     int id;
-    char descripcion[25];
+    char descripcion[20];
     float precio;
 }eServicio;
 
+int hardcodearServicios(eServicio listaServicios[], int tamServicio);
+int menuIngresarServicios(int* id);
+int cargarDescripcionServicioId(eServicio listaServicios[], int tamServicio,int id, char descripcion[]);
 
-int menuIngresarServicio(eServicio vec[], int tamServ);
-int cargarDescripcionServicio(eServicio servicios[], char descripcion[], int id, int tamServ);
-
-int validarServicioId(eServicio vec[], int tamServ, int id);
-
-int cargarPrecioServicio(eServicio servicios[], float* precio, int id, int tamServ);
-
-int listarServicios(eServicio servicios[],int tamServ);
-
-void mostrarServicio(eServicio servicio);
 #endif // SERVICIO_H_INCLUDED

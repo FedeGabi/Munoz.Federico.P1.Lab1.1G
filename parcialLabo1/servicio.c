@@ -1,108 +1,98 @@
 #include "servicio.h"
 
 
-int menuIngresarServicio(eServicio vec[], int tamServ)
+int idServicios[4]= {20000,20001,20002,20003};
+char servicios[4][20]= {"Lavado", "Pulido", "Encerado", "Completo"};
+float precios[4]= {450, 500, 600, 900};
+
+int hardcodearServicios(eServicio listaServicios[], int tamServicio)
 {
-    int opcion=0;
+    int retorno=0;
+    if(listaServicios!=NULL && tamServicio >0)
+    {
+        for(int i=0; i<tamServicio; i++)
+        {
+            listaServicios[i].id=idServicios[i];
+            strcpy(listaServicios[i].descripcion, servicios[i]);
+            listaServicios[i].precio=precios[i];
+        }
+        retorno=1;
+    }
+    return retorno;
+}
+
+
+int menuIngresarServicios(int* id)
+{
     int seguir=1;
+    int auxId;
+    int retorno=0;
     do
     {
-        for(int i=0; i<tamServ; i++)
+        system("cls");
+        printf("\n                      ****************************                      \n");
+        printf("                      ****** SERVICIOS ******                     \n");
+        printf("                      ****************************                     \n\n");
+        printf("1. LAVADO - $450\n");
+        printf("2. PULIDO - $500\n");
+        printf("3. ENCERADO - $600\n");
+        printf("4. COMPLETO - $900\n");
+        printf("INGRESE OPCION: ");
+        scanf("%d", &auxId);
+        fflush(stdin);
+        if(auxId==1)
         {
-            listarServicios(vec, tamServ);
-        }
-        ingresarInt(&opcion, "\nIngrese ID Servicio: ", "\nNO SE ADMITEN CARACTERES O NUMEROS NEGATIVOS");
-        if(validarServicioId(vec, tamServ, opcion))
-        {
+            *id=20000;
             seguir=0;
+            retorno=1;
+        }
+        else if(auxId ==2)
+        {
+            *id=20001;
+            seguir=0;
+            retorno=1;
+        }
+        else if(auxId ==3)
+        {
+            *id=20002;
+            seguir=0;
+            retorno=1;
+        }
+        else if(auxId==4)
+        {
+            *id=20003;
+            seguir=0;
+            retorno=1;
+        }
+        else if(auxId==5)
+        {
+            *id=20004;
+            seguir=0;
+            retorno=1;
         }
         else
         {
-            system("cls");
-            seguir=confirmar("\nError, ID invalido, volver a ingresar? (s o n): ");
-            opcion=0;
+            seguir=confirmar("\n Opcion incorrecta. Volver a ingresar? (s o n): ");
         }
     }
-    while(seguir);
-    return opcion;
-}
-
-int cargarDescripcionServicio(eServicio servicios[], char descripcion[], int id, int tamServ)
-{
-    int retorno=0;
-    if(servicios != NULL && descripcion != NULL && tamServ>0 && id>0)
-    {
-        for(int i=0; i<tamServ; i++)
-        {
-            if(servicios[i].id == id)
-            {
-                strcpy(descripcion, servicios[i].descripcion);
-                retorno=1;
-                break;
-            }
-        }
-        retorno=1;
-    }
+    while(seguir==1);
     return retorno;
 }
 
-int validarServicioId(eServicio vec[], int tamServ, int id)
+int cargarDescripcionServicioId(eServicio listaServicios[], int tamServicio,int id, char descripcion[])
 {
-    int retorno = 0;
-    if( vec != NULL && tamServ > 0 && id>0 )
+    int retorno=0;
+    if(listaServicios!=NULL && tamServicio>0 && descripcion!=NULL)
     {
-        for(int i=0; i < tamServ; i++)
+        for(int i=0; i<tamServicio; i++)
         {
-            if(vec[i].id == id)
+            if(listaServicios[i].id== id)
             {
+                strcpy(descripcion, listaServicios[i].descripcion);
                 retorno=1;
                 break;
             }
         }
     }
     return retorno;
-}
-
-int cargarPrecioServicio(eServicio servicios[], float* precio, int id, int tamServ)
-{
-    int retorno=0;
-    if(servicios != NULL && precio>0 && tamServ>0 && id>0)
-    {
-        for(int i=0; i<tamServ; i++)
-        {
-            if(servicios[i].id == id)
-            {
-                *precio=servicios[i].precio;
-                retorno=1;
-                break;
-            }
-        }
-        retorno=1;
-    }
-    return retorno;
-}
-
-int listarServicios(eServicio servicios[],int tamServ)
-{
-    int retorno=0;
-    if(servicios != NULL && tamServ>0)
-    {
-        system("cls");
-        printf("------------------------------------\n");
-        printf("------------LISTA SERVICIOS----------\n");
-        printf("------------------------------------\n");
-        printf("ID            SERVICIO         PRECIO\n");
-        printf("------------------------------------\n\n");
-        for(int i=0 ; i<tamServ ; i++)
-        {
-                mostrarServicio(servicios[i]);
-                retorno=1;
-        }
-    }
-    return retorno;
-}
-
-void mostrarServicio(eServicio servicio)
-{
-    printf("%d  |   %10s   |   %.2f   |\n", servicio.id, servicio.descripcion, servicio.precio );
 }
