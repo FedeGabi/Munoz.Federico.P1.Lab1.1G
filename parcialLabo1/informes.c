@@ -272,6 +272,37 @@ int mostrarAutosColor(eAuto listaAutos[], int tamAutos, eColor listaColores[], e
     return retorno;
 }
 
+int mostrarServicios(eTrabajo listaTrabajos[], int tamTrabajos, eServicio listaServicios[], int tamServicios)
+{
+    int retorno=0;
+    int auxId;
+    if(listaTrabajos!=NULL && tamTrabajos>0 && listaServicios!=NULL && tamServicios>0)
+    {
+        if(isNotEmptyTrabajo(listaTrabajos, tamTrabajos))
+        {
+            if(menuIngresarServicios(&auxId))
+            {
+                for(int i=0; i<tamTrabajos ; i++)
+                {
+                    if(listaTrabajos[i].isEmpty==0 && listaTrabajos[i].idServicio==auxId)
+                    {
+                        mostrarTrabajo(listaTrabajos[i], listaServicios, tamTrabajos, tamServicios);
+                    }
+                }
+            }
+            else
+            {
+                printf("\nOpcion invalida\n");
+            }
+        }
+        else
+        {
+            printf("\nNo existen trabajos cargados en el sistema\n");
+            system("pause");
+        }
+    }
+    return retorno;
+}
 
 
 

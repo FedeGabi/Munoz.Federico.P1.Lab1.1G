@@ -20,4 +20,6 @@ int mostrarAutosColor(eAuto listaAutos[], int tamAutos, eColor listaColores[], e
 
 int mostrarAutosMarca(eAuto listaAutos[], int tamAutos, eColor listaColores[], eMarca listaMarcas[], eCliente listaClientes[], int tamClientes, int tamColor, int tamMarca);
 
+int mostrarServicios(eTrabajo listaTrabajos[], int tamTrabajos, eServicio listaServicios[], int tamServicios);
+
 #endif // INFORMES_H_INCLUDED

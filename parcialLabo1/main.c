@@ -124,6 +124,8 @@ int main()
             system("pause");
             break;
         case 'g':
+            mostrarServicios(listaTrabajos, TAM_TRABAJOS, listaServicios, TAM_SERVICIOS);
+            system("pause");
             break;
         case 'h':
             altaTrabajo(listaTrabajos, listaServicios, listaAutos, listaColores, listaMarcas,listaClientes, TAM_TRABAJOS,TAM_SERVICIOS,TAM_AUTOS,TAM_COLORES,TAM_MARCAS,TAM_CLIENTES,&idNextTrabajos);
