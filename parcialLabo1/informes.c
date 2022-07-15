@@ -9,28 +9,36 @@ int mostrarTrabajosFecha(eTrabajo listaTrabajos[], int tamTrabajos, eServicio li
     eFecha auxFecha;
     if(listaTrabajos!=NULL && tamTrabajos>0)
     {
-        if(cargarFecha(&auxFecha))
+        if(isNotEmptyTrabajo(listaTrabajos, tamTrabajos))
         {
-            printf("ID    ID-AUTO      SERVICIO       FECHA \n");
-            printf("----------------------------------------\n\n");
-            for(int i=0; i<tamTrabajos; i++)
+            if(cargarFecha(&auxFecha))
             {
-                if(listaTrabajos[i].fecha.dia == auxFecha.dia &&
-                   listaTrabajos[i].fecha.mes == auxFecha.mes &&
-                   listaTrabajos[i].fecha.anio == auxFecha.anio)
+                printf("ID    ID-AUTO      SERVICIO       FECHA \n");
+                printf("----------------------------------------\n\n");
+                for(int i=0; i<tamTrabajos; i++)
                 {
-                    mostrarTrabajo(listaTrabajos[i], listaServicios, tamTrabajos, tamServicios);
-                    flag=1;
+                    if(listaTrabajos[i].fecha.dia == auxFecha.dia &&
+                            listaTrabajos[i].fecha.mes == auxFecha.mes &&
+                            listaTrabajos[i].fecha.anio == auxFecha.anio)
+                    {
+                        mostrarTrabajo(listaTrabajos[i], listaServicios, tamTrabajos, tamServicios);
+                        flag=1;
+                    }
+                }
+                if(flag==0)
+                {
+                    printf("\nNo existen servicios en la fecha: %02d/%02d/%d\n\n", auxFecha.dia, auxFecha.mes, auxFecha.anio);
+
                 }
             }
-            if(flag==0)
+            else
             {
-                printf("\nNo existen servicios en la fecha: %02d/%02d/%d\n\n", auxFecha.dia, auxFecha.mes, auxFecha.anio);
-
+                printf("\nBusqueda cancelada\n");
             }
         }
-        else{
-            printf("\nBusqueda cancelada\n");
+        else
+        {
+            printf("\nNo existen trabajos cargados en el sistema\n");
         }
         system("pause");
     }
@@ -42,7 +50,7 @@ int mostrarTrabajosFecha(eTrabajo listaTrabajos[], int tamTrabajos, eServicio li
 int marcaMasElegidaCliente(eAuto listaAutos[], int tamAutos, eMarca listaMarcas[], int tamMarcas)
 {
     int retorno=0;
-    int contador[5]={0,0,0,0,0};
+    int contador[5]= {0,0,0,0,0};
     int auxInt=0;
     int indice=-1;
     if(listaAutos!= NULL && listaMarcas!=NULL  && tamAutos>0 && tamMarcas>0)
@@ -68,14 +76,15 @@ int marcaMasElegidaCliente(eAuto listaAutos[], int tamAutos, eMarca listaMarcas[
         }
         if(auxInt>0)
         {
-            printf("\nLa marca mas elegida es %s, con %d autos\n", strupr(listaMarcas[indice].descripcion) ,auxInt);
+            printf("\nLa marca mas elegida es %s, con %d autos\n", strupr(listaMarcas[indice].descripcion),auxInt);
         }
-        else{
+        else
+        {
             printf("\nNo hay autos cargados en el sistema \n");
         }
 
     }
-     system("pause");
+    system("pause");
     return retorno;
 }
 
@@ -139,29 +148,37 @@ int mostrarListaOrdenadaPorCaja(eAuto listaAutos[], int tamAutos, eMarca listaMa
     int retorno=0;
     if(listaAutos!=NULL && tamAutos>0)
     {
-        printf("ID   MARCA   COLOR   CAJA\n");
-        printf("-------------------------\n");
-        for(int i=0; i < tamAutos; i++)
+        if(isNotEmpty(listaAutos, tamAutos))
         {
-            if(listaAutos[i].isEmpty==0)
+        printf("ID       MARCA       COLOR   CAJA    DUENIO\n");
+        printf("-------------------------------------------\n\n");
+            for(int i=0; i < tamAutos; i++)
             {
-                if(listaAutos[i].caja=='a')
+                if(listaAutos[i].isEmpty==0)
                 {
-                    mostrarAuto(listaAutos[i], listaMarcas, listaColores, listaClientes, tamClientes, tamColor, tamMarca);
+                    if(listaAutos[i].caja=='a')
+                    {
+                        mostrarAuto(listaAutos[i], listaMarcas, listaColores, listaClientes, tamClientes, tamColor, tamMarca);
+                    }
+                    retorno=1;
                 }
-                retorno=1;
+            }
+            for(int i=0; i < tamAutos; i++)
+            {
+                if(listaAutos[i].isEmpty==0)
+                {
+                    if(listaAutos[i].caja=='m')
+                    {
+                        mostrarAuto(listaAutos[i], listaMarcas, listaColores, listaClientes, tamClientes, tamColor, tamMarca);
+                    }
+                    retorno=1;
+                }
             }
         }
-        for(int i=0; i < tamAutos; i++)
+        else
         {
-            if(listaAutos[i].isEmpty==0)
-            {
-                if(listaAutos[i].caja=='m')
-                {
-                    mostrarAuto(listaAutos[i], listaMarcas, listaColores, listaClientes, tamClientes, tamColor, tamMarca);
-                }
-                retorno=1;
-            }
+            printf("\nNo existen autos cargados en e sistema\n");
+            system("pause");
         }
     }
     return retorno;
@@ -176,38 +193,47 @@ int calcularPorcentajeCajas(eAuto listaAutos[], int tamAutos)
     int automatica=0;
     if(listaAutos!=NULL && tamAutos>0)
     {
-        for(int i=0; i<tamAutos; i++)
+        if(isNotEmpty(listaAutos, tamAutos))
         {
-            if(listaAutos[i].isEmpty==0)
+            for(int i=0; i<tamAutos; i++)
             {
-                if(listaAutos[i].caja=='a')
+                if(listaAutos[i].isEmpty==0)
                 {
-                    contador++;
-                    automatica++;
-                }
-                else if(listaAutos[i].caja=='m')
-                {
-                    contador++;
-                    manual++;
+                    if(listaAutos[i].caja=='a')
+                    {
+                        contador++;
+                        automatica++;
+                    }
+                    else if(listaAutos[i].caja=='m')
+                    {
+                        contador++;
+                        manual++;
+                    }
                 }
             }
-        }
-        if(manual>0)
-        {
-            printf("\n Porcentaje de cajas manuales: %.2f\n", 100*manual/(float)contador);
+            if(manual>0)
+            {
+                printf("\n Porcentaje de cajas manuales: %.2f\n", 100*manual/(float)contador);
+            }
+            else
+            {
+                printf("\nNo hay autos con caja manual \n");
+            }
+            if(automatica>0)
+            {
+                printf("\n Porcentaje de cajas automaticas: %.2f\n", 100*automatica/(float)contador);
+            }
+            else
+            {
+                printf("\nNo hay autos con caja automatica \n");
+            }
         }
         else
         {
-            printf("\nNo hay autos con caja manual \n");
+            printf("\nNo existen autos cargados en el sistema\n");
+            system("pause");
         }
-        if(automatica>0)
-        {
-            printf("\n Porcentaje de cajas automaticas: %.2f\n", 100*automatica/(float)contador);
-        }
-        else
-        {
-            printf("\nNo hay autos con caja automatica \n");
-        }
+
         printf("\n");
         retorno=1;
     }
@@ -220,19 +246,27 @@ int mostrarAutosColor(eAuto listaAutos[], int tamAutos, eColor listaColores[], e
     int auxId;
     if(listaAutos!=NULL && tamAutos>0)
     {
-        if(menuIngresarColor(&auxId))
+        if(isNotEmpty(listaAutos, tamAutos))
         {
-            for(int i=0; i<tamAutos ; i++)
+            if(menuIngresarColor(&auxId))
             {
-                if(listaAutos[i].isEmpty==0 && listaAutos[i].idColor==auxId)
+                for(int i=0; i<tamAutos ; i++)
                 {
-                    mostrarAuto(listaAutos[i],listaMarcas, listaColores, listaClientes, tamClientes, tamColor, tamMarca);
+                    if(listaAutos[i].isEmpty==0 && listaAutos[i].idColor==auxId)
+                    {
+                        mostrarAuto(listaAutos[i],listaMarcas, listaColores, listaClientes, tamClientes, tamColor, tamMarca);
+                    }
                 }
+            }
+            else
+            {
+                printf("\nOpcion invalida\n");
             }
         }
         else
         {
-            printf("\nOpcion invalida\n");
+            printf("\nNo existen autos cargados en el sistema\n");
+            system("pause");
         }
     }
     return retorno;
@@ -247,19 +281,27 @@ int mostrarAutosMarca(eAuto listaAutos[], int tamAutos, eColor listaColores[], e
     int auxId;
     if(listaAutos!=NULL && tamAutos>0)
     {
-        if(menuIngresarMarca(&auxId))
+        if(isNotEmpty(listaAutos, tamAutos))
         {
-            for(int i=0; i<tamAutos ; i++)
+            if(menuIngresarMarca(&auxId))
             {
-                if(listaAutos[i].isEmpty==0 && listaAutos[i].idMarca==auxId)
+                for(int i=0; i<tamAutos ; i++)
                 {
-                    mostrarAuto(listaAutos[i],listaMarcas, listaColores, listaClientes, tamClientes, tamColor, tamMarca);
+                    if(listaAutos[i].isEmpty==0 && listaAutos[i].idMarca==auxId)
+                    {
+                        mostrarAuto(listaAutos[i],listaMarcas, listaColores, listaClientes, tamClientes, tamColor, tamMarca);
+                    }
                 }
+            }
+            else
+            {
+                printf("\nOpcion invalida\n");
             }
         }
         else
         {
-            printf("\nOpcion invalida\n");
+            printf("\nNo existen autos cargados en el sistema\n");
+            system("pause");
         }
     }
     return retorno;

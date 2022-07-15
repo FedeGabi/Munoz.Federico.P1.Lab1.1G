@@ -140,11 +140,10 @@ int main()
             break;
         case 'j':
             calcularPorcentajeCajas(listaAutos, TAM_AUTOS);
-            system("pause");
             break;
         case 'k':
-            mostrarListaOrdenadaPorCaja(listaAutos, TAM_AUTOS, listaMarcas, listaColores, listaClientes, TAM_CLIENTES, TAM_MARCAS, TAM_COLORES);
-            system("pause");
+                mostrarListaOrdenadaPorCaja(listaAutos, TAM_AUTOS, listaMarcas, listaColores, listaClientes, TAM_CLIENTES, TAM_MARCAS, TAM_COLORES);
+                system("pause");
             break;
         case 'l':
             contarAutosColorMarca(listaAutos, listaColores, listaMarcas, listaClientes, TAM_CLIENTES, TAM_AUTOS, TAM_COLORES, TAM_MARCAS);
@@ -154,6 +153,7 @@ int main()
             break;
         case 'n':
             marcaMasElegidaCliente(listaAutos, TAM_AUTOS, listaMarcas, TAM_MARCAS);
+            break;
         default:
             break;
         }

@@ -20,6 +20,7 @@ int cargarFecha(eFecha* fecha)
         scanf("%d", &auxMes);
         printf("\n ingrese anio: ");
         scanf("%d", &auxAnio);
+        fflush(stdin);
         if(auxDia > 0 && auxDia <=31 && auxMes >0 && auxMes <=12 && auxAnio >2021 && auxAnio <2023)
         {
             fecha->dia=auxDia;
@@ -30,7 +31,7 @@ int cargarFecha(eFecha* fecha)
         }
         else
         {
-            seguir=confirmar("\n valores incorrectos. Desea reingresar? (s o n): ");
+            seguir=confirmar("\nValores incorrectos. Desea reingresar? (s o n): ");
         }
     }
     while(seguir==1);

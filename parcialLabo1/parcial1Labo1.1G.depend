@@ -37,7 +37,7 @@
 1657726765 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\color.c
 	"color.h"
 
-1657573852 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\fecha.c
+1657891989 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\fecha.c
 	"fecha.h"
 
 1657888245 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\fecha.h
@@ -45,7 +45,7 @@
 	<stdlib.h>
 	"inputs.h"
 
-1657888282 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\informes.c
+1657892908 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\informes.c
 	"informes.h"
 
 1657887731 c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\informes.h
@@ -70,7 +70,7 @@
 1657735639 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\inputs.c
 	"inputs.h"
 
-1657887869 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\main.c
+1657893205 source:c:\users\fedec\onedrive\desktop\parcial1labo1.1g\parcial1labo1.1g\main.c
 	<stdio.h>
 	<stdlib.h>
 	"inputs.h"
